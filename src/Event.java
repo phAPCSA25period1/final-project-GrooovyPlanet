@@ -23,5 +23,9 @@ public class Event {
          */
         public String getTitle() {
         return title;
+        }
+        @Override
+        public String toString() {
+         return title + " on " + date;
+        }
     }
-}

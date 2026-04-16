@@ -12,8 +12,9 @@ public class Calendar {
     }
 
     // Remove an event
-    public void removeEvent(Event event) {
-        events.remove(event);
+    public void removeByTitle(String title) {
+    events.removeIf(e -> e.getTitle().equalsIgnoreCase(title));
+    System.out.println("Event removed (if it existed).");
     }
 
     // View all events
@@ -22,6 +23,7 @@ public class Calendar {
             System.out.println(e);
         }
     }
+
 
     // Optional: find events by date
     public void getEventsByDate(String date) {
