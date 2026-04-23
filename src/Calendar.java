@@ -8,8 +8,17 @@ public class Calendar {
 
     // Add an event
     public void addEvent(Event event) {
-        events.add(event);
+    for (Event e : events) {
+        if (e.getTitle().equalsIgnoreCase(event.getTitle()) &&
+            e.getDate().equals(event.getDate())) {
+
+            System.out.println("Duplicate event detected. Not added.");
+            return;
+        }
     }
+
+    events.add(event);
+}
 
     // Remove an event
     public void removeByTitle(String title) {
@@ -19,18 +28,30 @@ public class Calendar {
 
     // View all events
     public void displayEvents() {
-        for (Event e : events) {
-            System.out.println(e);
-        }
+    if (events.isEmpty()) {
+        System.out.println("No events found.");
+        return;
     }
+
+    for (Event e : events) {
+        System.out.println(e);
+    }
+}
 
 
     // Optional: find events by date
     public void getEventsByDate(String date) {
-        for (Event e : events) {
-            if (e.getDate().equals(date)) {
-                System.out.println(e);
-            }
+    boolean found = false;
+
+    for (Event e : events) {
+        if (e.getDate().equals(date)) {
+            System.out.println(e);
+            found = true;
         }
     }
+
+    if (!found) {
+        System.out.println("No events found on this date.");
+    }
+}
 }
