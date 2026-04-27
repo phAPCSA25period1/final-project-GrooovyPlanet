@@ -20,6 +20,19 @@ public class Calendar {
     events.add(event);
 }
 
+public boolean updateEvent(String title, String date, Event updatedEvent) {
+    for (int i = 0; i < events.size(); i++) {
+        Event e = events.get(i);
+        if (e.getTitle().equalsIgnoreCase(title) &&
+            e.getDate().equals(date)) {
+
+            events.set(i, updatedEvent);
+            return true;
+        }
+    }
+    return false;
+}
+
     // Remove an event
     public void removeByTitle(String title) {
     events.removeIf(e -> e.getTitle().equalsIgnoreCase(title));

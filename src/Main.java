@@ -8,13 +8,14 @@ public class Main {
 
         //Options and choices
 
-        while (choice != 5) {
+        while (choice != 6) {
             System.out.println("\n--- Calendar Menu ---");
             System.out.println("1. Add event");
             System.out.println("2. Remove event by title");
             System.out.println("3. View all events");
             System.out.println("4. Search by date");
-            System.out.println("5. Exit");
+            System.out.println("5. Update event");
+            System.out.println("6. Exit");
             System.out.print("Choose an option: ");
 
             choice = scanner.nextInt();
@@ -51,6 +52,32 @@ public class Main {
                     break;
 
                 case 5:
+                    System.out.print("Enter title of event to update: ");
+                    String oldTitle = scanner.nextLine();
+
+                    System.out.print("Enter date of event to update (YYYY-MM-DD): ");
+                    String oldDate = scanner.nextLine();
+
+                    System.out.print("Enter new title: ");
+                    String newTitle = scanner.nextLine();
+
+                    System.out.print("Enter new date (YYYY-MM-DD): ");
+                    String newDate = scanner.nextLine();
+
+                    boolean updated = calendar.updateEvent(
+                        oldTitle,
+                        oldDate,
+                        new Event(newTitle, newDate)
+                    );
+
+                    if (updated) {
+                        System.out.println("Event updated successfully.");
+                    } else {
+                        System.out.println("Event not found.");
+                    }
+                    break;
+
+                case 6:
                     System.out.println("Goodbye!");
                     break;
 
