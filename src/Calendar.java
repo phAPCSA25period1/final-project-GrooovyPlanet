@@ -67,4 +67,22 @@ public boolean updateEvent(String title, String date, Event updatedEvent) {
         System.out.println("No events found on this date.");
     }
 }
+    public void getEventsByMonthYear(int month, int year) {
+        boolean found = false;
+
+        for (Event event : events) {
+            String[] parts = event.getDate().split("-");
+            int eventYear = Integer.parseInt(parts[0]);
+            int eventMonth = Integer.parseInt(parts[1]);
+
+            if (eventYear == year && eventMonth == month) {
+                System.out.println(event);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No events found for that month.");
+        }
+    }
 }

@@ -45,10 +45,33 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.print("Enter date to search (YYYY-MM-DD): ");
-                    String searchDate = scanner.nextLine();
-                    System.out.println("--- Events on " + searchDate + " ---");
-                    calendar.getEventsByDate(searchDate);
+                     System.out.println("Search by:");
+                    System.out.println("1. Exact date");
+                    System.out.println("2. Month and year");
+                    System.out.print("Choose option: ");
+                    int searchChoice = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+
+                    if (searchChoice == 1) {
+                        System.out.print("Enter date to search (YYYY-MM-DD): ");
+                        String searchDate = scanner.nextLine();
+                        System.out.println("--- Events on " + searchDate + " ---");
+                        calendar.getEventsByDate(searchDate);
+
+                    } else if (searchChoice == 2) {
+                        System.out.print("Enter year (YYYY): ");
+                        int year = scanner.nextInt();
+
+                        System.out.print("Enter month (1-12): ");
+                        int month = scanner.nextInt();
+                        scanner.nextLine(); // consume newline
+
+                        System.out.println("--- Events in " + year + "-" + String.format("%02d", month) + " ---");
+                        calendar.getEventsByMonthYear(month, year);
+
+                    } else {
+                        System.out.println("Invalid search option.");
+                    }
                     break;
 
                 case 5:
