@@ -16,6 +16,7 @@ public class Main {
             System.out.println("4. Search by date");
             System.out.println("5. Update event");
             System.out.println("6. Exit");
+            System.out.println("7. Run tutorial");
             System.out.print("Choose an option: ");
 
             choice = scanner.nextInt();
@@ -104,13 +105,80 @@ public class Main {
                     System.out.println("Goodbye!");
                     break;
 
+                case 7:
+                runTutorial(calendar, scanner);
+                break;
+
                 default:
                     System.out.println("Invalid option, please try again.");
+
             }
         }
 
 
         scanner.close();
+    }
+
+    public static void runTutorial(Calendar calendar, Scanner scanner) {
+        System.out.println("\n=== Welcome to the Calendar Tutorial ===");
+        System.out.println("This will guide you step-by-step.\n");
+
+        // STEP 1: Add Event
+        System.out.println("Step 1: Let's add your first event.");
+        System.out.print("Enter a title: ");
+        String title = scanner.nextLine();
+
+        System.out.print("Enter a date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+
+        calendar.addEvent(new Event(title, date));
+        System.out.println("✅ Event added!\n");
+
+        // STEP 2: View Events
+        System.out.println("Step 2: Viewing all events...");
+        calendar.displayEvents();
+        System.out.println();
+
+        // STEP 3: Search by Date
+        System.out.println("Step 3: Search for your event by date.");
+        System.out.print("Enter the same date: ");
+        String searchDate = scanner.nextLine();
+
+        calendar.getEventsByDate(searchDate);
+        System.out.println();
+
+        // STEP 4: Update Event
+        System.out.println("Step 4: Let's update your event.");
+        System.out.print("Enter a new title: ");
+        String newTitle = scanner.nextLine();
+
+        System.out.print("Enter a new date (YYYY-MM-DD): ");
+        String newDate = scanner.nextLine();
+
+        boolean updated = calendar.updateEvent(title, date, new Event(newTitle, newDate));
+
+        if (updated) {
+            System.out.println("✅ Event updated!\n");
+        } else {
+            System.out.println("❌ Update failed.\n");
+        }
+
+        // STEP 5: Remove Event
+        System.out.println("Step 5: Now remove the event.");
+        System.out.print("Enter the title to remove: ");
+        String removeTitle = scanner.nextLine();
+
+        calendar.removeByTitle(removeTitle);
+        System.out.println();
+
+        // FINAL STEP
+        System.out.println("🎉 Tutorial complete!");
+        System.out.println("You now know how to:");
+        System.out.println("- Add events");
+        System.out.println("- View events");
+        System.out.println("- Search events");
+        System.out.println("- Update events");
+        System.out.println("- Remove events\n");
     }
 }
 
