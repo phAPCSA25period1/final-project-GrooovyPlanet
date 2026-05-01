@@ -1,189 +1,134 @@
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=23508273)
-# AP Computer Science A – Final Project
-## Software & Systems Development Capstone
+# Java Calendar Application
 
-Welcome to your **Final Project repository**.
+## Overview
 
-This repository will hold:
-- Your complete Java project
-- Your project journal and planning artifacts
-- Your final, working software product
-
-This is not just an assignment — it is a **capstone software project**.
+This is a simple command-line calendar application written in Java. It allows users to create, view, search, update, and delete events. The program is interactive and menu-driven, making it easy to use directly from the terminal.
 
 ---
 
-## 📌 Project Overview (Read Carefully)
+## Features
 
-In this project, you will:
-- Design and build a **real piece of software**
-- Solve **one real problem** for **one clearly defined user**
-- Work using **agile development**
-- Show evidence of **professional software practices**
-- Use AI responsibly as a planning and support tool
+* Add events with a title and date
+* Prevent duplicate events (same title + date)
+* Remove events by title
+* View all events
+* Search events:
 
-You will leave this course with something you can confidently say:
-
-> “I built this software.”
-
----
-
-## 🔁 Required Workflow (How You Must Work)
-
-### ✅ Daily GitHub Commits (Required)
-You are expected to:
-- Make **at least one meaningful commit every class day**
-- Write **descriptive commit messages** that explain:
-  - What you changed
-  - Why you changed it
-  - What goal it supports
-
-✅ Good commit messages:
-- `Sprint 1: Created Player class and tested constructor`
-- `Sprint 2: Implemented 2D map and verified movement logic`
-
-🚫 Poor commit messages:
-- `updates`
-- `stuff`
-- `final version`
-
-Your commit history is **evidence of your thinking and progress**.
+  * By exact date
+  * By month and year
+* Update existing events
+* Built-in step-by-step tutorial mode
 
 ---
 
-## 🔁 Agile Development & Sprints
+## Project Structure
 
-You will complete **4 sprints**.  
-Each sprint includes:
-- Planning
-- Building
-- Testing
-- Feedback and reflection
+### `Event` Class
 
-Each sprint ends with:
-- A sprint grade
-- A sprint reflection
-- Feedback exchanged with peers
+Represents a single calendar event.
 
-🚫 You may NOT complete multiple sprints at once.  
-✅ Each sprint grade is **final**.
+**Fields:**
 
----
+* `title` – name of the event
+* `date` – event date in `YYYY-MM-DD` format
 
-## 🧪 Testing Expectations
+**Methods:**
 
-Testing is required every sprint.
-
-✅ Testing may include:
-- Running the program with different inputs
-- Print‑based testing
-- Driver program testing
-- Verifying logic and edge cases
-
-You should be able to explain:
-- What you tested
-- How you tested it
-- What you discovered or fixed
+* `getTitle()` – returns event title
+* `getDate()` – returns event date
+* `toString()` – returns formatted event string
 
 ---
 
-## 🗂️ Required Project Components
+### `Calendar` Class
 
-Your final project must include:
+Manages a list of events using an `ArrayList`.
 
-- ✅ Multiple interacting Java classes
-- ✅ Encapsulation (`private` fields, appropriate getters/setters)
-- ✅ Arrays and/or ArrayLists
-- ✅ A purposeful **2D array**
-- ✅ A working driver program (`main`)
-- ✅ A class diagram matching your final code
-- ✅ Clear documentation
-- ✅ A program that runs and works
+**Key Methods:**
 
-Inheritance and interfaces are optional but encouraged.
+* `addEvent(Event event)` – adds a new event (checks for duplicates)
+* `removeByTitle(String title)` – removes events by title
+* `displayEvents()` – prints all events
+* `getEventsByDate(String date)` – filters events by exact date
+* `getEventsByMonthYear(int month, int year)` – filters by month/year
+* `updateEvent(String title, String date, Event updatedEvent)` – updates an existing event
 
 ---
 
-## 🤖 Using AI (Allowed, With Responsibility)
+### `Main` Class
 
-You may use AI to:
-- Organize ideas
-- Plan sprints
-- Debug code
-- Suggest design improvements
+Handles user interaction through a menu-driven interface.
 
-You must:
-- Document how you used AI
-- Review and evaluate AI suggestions
-- Understand and explain your final code
+**Menu Options:**
 
-AI should act like:
-> A junior developer you supervise — not something that builds the project for you.
+1. Add event
+2. Remove event
+3. View all events
+4. Search events
+5. Update event
+6. Exit
+7. Run tutorial
 
 ---
 
-## 📘 Project Journal
+## How to Run
 
-All planning, work logs, testing notes, and reflections live in **your project journal**.
+### 1. Compile the program
 
-If it happened during this project, it should be documented there.
+```bash
+javac Main.java
+```
 
----
+### 2. Run the program
 
-## ✅ Final Submission Expectations
-
-By the end of the project:
-- Your program should run reliably
-- Your technical requirements should be met
-- Your code should be readable and organized
-- Your repository should look **professional**
+```bash
+java Main
+```
 
 ---
 
-# ✨ Final Step: README Update (Very Important)
+## Usage Notes
 
-When your project is complete, you must **rewrite this README**  
-so it reflects **your software**, not the assignment.
-
-Your final README should include:
-
----
-
-## 🔹 Project Title
-
-## 🔹 What This Software Does
-Explain your project in plain language.
-
-## 🔹 Who It’s For
-Describe the user and the problem being solved.
-
-## 🔹 How to Run the Program
-Clear steps so someone else can run your project.
-
-## 🔹 Technical Overview
-Brief description of:
-- Main classes
-- Key data structures
-- Program logic
-
-## 🔹 Class Diagram
-Include or link your final class diagram.
-
-## 🔹 Known Limitations / Future Improvements
-What works well, and what you would improve with more time.
+* Dates must be entered in **YYYY-MM-DD** format (e.g., `2026-05-01`)
+* Event titles are case-insensitive when checking duplicates or removing
+* Removing by title will delete all matching events
+* Updating requires both the original title and date
 
 ---
 
-## 🎯 Final Reminder
+## Example
 
-This repository represents **you as a developer**.
+```
+--- Calendar Menu ---
+1. Add event
+2. Remove event by title
+3. View all events
+4. Search by date
+5. Update event
+6. Exit
+7. Run tutorial
+```
 
-Take pride in:
-- Your process
-- Your commits
-- Your code
-- Your documentation
+---
 
-Build something real.  
-Build it thoughtfully.  
-Build it well.
+## Tutorial Mode
+
+Select option `7` to run a guided walkthrough of all features. This is helpful for first-time users.
+
+---
+
+## Possible Improvements
+
+* Validate date format using `LocalDate`
+* Add time support for events
+* Store events in a file (persistence)
+* Sort events chronologically
+* Add unique IDs instead of relying on title/date
+
+---
+
+## Author
+
+Developed as a simple Java project to demonstrate object-oriented programming, collections, and user interaction via the console.
+
+---
