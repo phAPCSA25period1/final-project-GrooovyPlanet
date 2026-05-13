@@ -1,27 +1,44 @@
 import java.util.Scanner;
 
 /**
- * Main driver class for the Calendar application.
- * <p>
- * This program allows users to:
- * </p>
+ * Entry point and user interface controller for the Calendar application.
+ *
+ * <p>This application provides a console-based menu system that allows users to
+ * manage calendar events. Users can perform operations such as:</p>
+ *
  * <ul>
- *     <li>Add events</li>
- *     <li>Remove events</li>
- *     <li>View all events</li>
- *     <li>Search events by date or month/year</li>
- *     <li>Update existing events</li>
- *     <li>Run an interactive tutorial</li>
+ *     <li>Adding new events</li>
+ *     <li>Removing events by title</li>
+ *     <li>Viewing all stored events</li>
+ *     <li>Searching for events by date or month/year</li>
+ *     <li>Updating existing events</li>
+ *     <li>Running an interactive tutorial</li>
  * </ul>
+ *
+ * <p>The program continues running until the user selects the exit option.</p>
+ *
+ * @author YourName
+ * @version 1.0
  */
 public class Main {
 
     /**
-     * Main method that starts the calendar program.
-     * <p>
-     * Displays a menu-driven interface that continuously runs
-     * until the user chooses to exit.
-     * </p>
+     * Launches the Calendar application.
+     *
+     * <p>This method initializes the calendar system and continuously displays
+     * a menu-driven interface for user interaction. Based on the selected menu
+     * option, the application performs the requested calendar operation.</p>
+     *
+     * <p>Menu options include:</p>
+     * <ol>
+     *     <li>Add an event</li>
+     *     <li>Remove an event</li>
+     *     <li>Display all events</li>
+     *     <li>Search events</li>
+     *     <li>Update an event</li>
+     *     <li>Exit the application</li>
+     *     <li>Run the tutorial</li>
+     * </ol>
      *
      * @param args command-line arguments (not used)
      * @throws Exception if an unexpected runtime error occurs
@@ -29,28 +46,29 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         /**
-         * Calendar object used to store and manage events.
+         * Stores and manages all calendar events.
          */
         Calendar calendar = new Calendar();
 
         /**
-         * Scanner object used for reading user input.
+         * Reads user input from the console.
          */
         Scanner scanner = new Scanner(System.in);
 
         /**
-         * Stores the user's menu selection.
-         * Initialized to -1 so the loop starts immediately.
+         * Tracks the currently selected menu option.
+         * Initialized to -1 to ensure the menu loop starts.
          */
         int choice = -1;
 
         /**
          * Main application loop.
-         * Continues running until the user selects option 6 (Exit).
+         *
+         * <p>Continues executing until the user selects the exit option.</p>
          */
         while (choice != 6) {
 
-            // Display menu options
+            // Display main menu
             System.out.println("\n--- Calendar Menu ---");
             System.out.println("1. Add event");
             System.out.println("2. Remove event by title");
@@ -62,49 +80,47 @@ public class Main {
             System.out.print("Choose an option: ");
 
             /**
-             * Read user's menu choice.
+             * Reads the user's menu selection.
              */
             choice = scanner.nextInt();
 
             /**
-             * Consumes the leftover newline character after nextInt().
-             * Prevents input skipping issues when using nextLine().
+             * Consumes the trailing newline character left by nextInt()
+             * to prevent skipped input when using nextLine().
              */
             scanner.nextLine();
 
             /**
-             * Executes functionality based on the user's menu selection.
+             * Executes functionality based on the selected menu option.
              */
             switch (choice) {
 
                 /**
-                 * CASE 1:
                  * Adds a new event to the calendar.
                  */
                 case 1:
 
-                    // Prompt user for event title
+                    // Request event title
                     System.out.print("Enter event title: ");
                     String title = scanner.nextLine();
 
-                    // Prompt user for event date
+                    // Request event date
                     System.out.print("Enter event date (YYYY-MM-DD): ");
                     String date = scanner.nextLine();
 
-                    // Create and add new event
+                    // Create and store event
                     calendar.addEvent(new Event(title, date));
 
-                    // Confirmation message
+                    // Success confirmation
                     System.out.println("Event added!");
                     break;
 
                 /**
-                 * CASE 2:
-                 * Removes events matching a given title.
+                 * Removes all events matching the specified title.
                  */
                 case 2:
 
-                    // Ask user which title to remove
+                    // Request title to remove
                     System.out.print("Enter title of event to remove: ");
                     String removeTitle = scanner.nextLine();
 
@@ -113,23 +129,24 @@ public class Main {
                     break;
 
                 /**
-                 * CASE 3:
-                 * Displays all events currently stored.
+                 * Displays all events currently stored in the calendar.
                  */
                 case 3:
 
                     System.out.println("--- All Events ---");
 
-                    // Display all calendar events
+                    // Output all events
                     calendar.displayEvents();
                     break;
 
                 /**
-                 * CASE 4:
-                 * Allows the user to search events.
-                 * User may search by:
-                 * 1. Exact date
-                 * 2. Month and year
+                 * Provides search functionality for calendar events.
+                 *
+                 * <p>Users may search either by:</p>
+                 * <ul>
+                 *     <li>Exact date</li>
+                 *     <li>Month and year</li>
+                 * </ul>
                  */
                 case 4:
 
@@ -146,7 +163,7 @@ public class Main {
                     scanner.nextLine();
 
                     /**
-                     * Search by exact date.
+                     * Search for events on an exact date.
                      */
                     if (searchChoice == 1) {
 
@@ -155,19 +172,19 @@ public class Main {
 
                         System.out.println("--- Events on " + searchDate + " ---");
 
-                        // Display events matching the date
+                        // Display matching events
                         calendar.getEventsByDate(searchDate);
 
                     /**
-                     * Search by month and year.
+                     * Search for events by month and year.
                      */
                     } else if (searchChoice == 2) {
 
-                        // Prompt for year
+                        // Request year
                         System.out.print("Enter year (YYYY): ");
                         int year = scanner.nextInt();
 
-                        // Prompt for month
+                        // Request month
                         System.out.print("Enter month (1-12): ");
                         int month = scanner.nextInt();
 
@@ -185,7 +202,7 @@ public class Main {
                         calendar.getEventsByMonthYear(month, year);
 
                     /**
-                     * Handles invalid search selections.
+                     * Handles invalid search menu selections.
                      */
                     } else {
 
@@ -195,30 +212,31 @@ public class Main {
                     break;
 
                 /**
-                 * CASE 5:
-                 * Updates an existing event.
+                 * Updates an existing event with new details.
                  */
                 case 5:
 
-                    // Ask for existing event title
+                    // Request current event title
                     System.out.print("Enter title of event to update: ");
                     String oldTitle = scanner.nextLine();
 
-                    // Ask for existing event date
+                    // Request current event date
                     System.out.print("Enter date of event to update (YYYY-MM-DD): ");
                     String oldDate = scanner.nextLine();
 
-                    // Ask for updated title
+                    // Request updated title
                     System.out.print("Enter new title: ");
                     String newTitle = scanner.nextLine();
 
-                    // Ask for updated date
+                    // Request updated date
                     System.out.print("Enter new date (YYYY-MM-DD): ");
                     String newDate = scanner.nextLine();
 
                     /**
-                     * Attempt to update the event.
-                     * Returns true if successful.
+                     * Attempts to update the specified event.
+                     *
+                     * @return true if the event was successfully updated;
+                     *         false otherwise
                      */
                     boolean updated = calendar.updateEvent(
                         oldTitle,
@@ -226,7 +244,7 @@ public class Main {
                         new Event(newTitle, newDate)
                     );
 
-                    // Display result message
+                    // Display update result
                     if (updated) {
 
                         System.out.println("Event updated successfully.");
@@ -239,8 +257,7 @@ public class Main {
                     break;
 
                 /**
-                 * CASE 6:
-                 * Exits the program.
+                 * Terminates the application.
                  */
                 case 6:
 
@@ -248,8 +265,7 @@ public class Main {
                     break;
 
                 /**
-                 * CASE 7:
-                 * Launches the interactive tutorial.
+                 * Starts the interactive tutorial.
                  */
                 case 7:
 
@@ -257,7 +273,6 @@ public class Main {
                     break;
 
                 /**
-                 * DEFAULT CASE:
                  * Handles invalid menu selections.
                  */
                 default:
@@ -267,35 +282,37 @@ public class Main {
         }
 
         /**
-         * Close scanner to prevent resource leaks.
+         * Releases scanner resources before application shutdown.
          */
         scanner.close();
     }
 
     /**
-     * Runs an interactive tutorial for new users.
-     * <p>
-     * The tutorial walks the user through:
-     * </p>
+     * Runs an interactive tutorial demonstrating application features.
+     *
+     * <p>The tutorial guides users through the core functionality of the
+     * calendar system in a step-by-step manner.</p>
+     *
+     * <p>The tutorial includes:</p>
      * <ol>
      *     <li>Adding an event</li>
-     *     <li>Viewing events</li>
-     *     <li>Searching events</li>
+     *     <li>Viewing all events</li>
+     *     <li>Searching for events by date</li>
      *     <li>Updating an event</li>
      *     <li>Removing an event</li>
      * </ol>
      *
-     * @param calendar the calendar object used during the tutorial
-     * @param scanner  scanner object used for user input
+     * @param calendar the calendar instance used during the tutorial
+     * @param scanner  the scanner used to collect user input
      */
     public static void runTutorial(Calendar calendar, Scanner scanner) {
 
         System.out.println("\n=== Welcome to the Calendar Tutorial ===");
-        System.out.println("This will guide you step-by-step.\n");
+        System.out.println("This tutorial will guide you through the basics.\n");
 
         /**
          * STEP 1:
-         * Add an event.
+         * Demonstrates how to add a new event.
          */
         System.out.println("Step 1: Let's add your first event.");
 
@@ -305,14 +322,14 @@ public class Main {
         System.out.print("Enter a date (YYYY-MM-DD): ");
         String date = scanner.nextLine();
 
-        // Add tutorial event
+        // Store tutorial event
         calendar.addEvent(new Event(title, date));
 
         System.out.println("✅ Event added!\n");
 
         /**
          * STEP 2:
-         * Display all events.
+         * Demonstrates how to view all events.
          */
         System.out.println("Step 2: Viewing all events...");
 
@@ -321,21 +338,21 @@ public class Main {
 
         /**
          * STEP 3:
-         * Search for events by date.
+         * Demonstrates searching events by date.
          */
         System.out.println("Step 3: Search for your event by date.");
 
         System.out.print("Enter the same date: ");
         String searchDate = scanner.nextLine();
 
-        // Search events
+        // Perform date search
         calendar.getEventsByDate(searchDate);
 
         System.out.println();
 
         /**
          * STEP 4:
-         * Update the event.
+         * Demonstrates updating an event.
          */
         System.out.println("Step 4: Let's update your event.");
 
@@ -364,20 +381,19 @@ public class Main {
 
         /**
          * STEP 5:
-         * Remove the event.
+         * Demonstrates removing an event.
          */
         System.out.println("Step 5: Now remove the event.");
 
         System.out.print("Enter the title to remove: ");
         String removeTitle = scanner.nextLine();
 
-        // Remove event
+        // Remove matching event(s)
         calendar.removeByTitle(removeTitle);
 
         System.out.println();
 
         /**
-         * FINAL STEP:
          * Tutorial completion message.
          */
         System.out.println("🎉 Tutorial complete!");
